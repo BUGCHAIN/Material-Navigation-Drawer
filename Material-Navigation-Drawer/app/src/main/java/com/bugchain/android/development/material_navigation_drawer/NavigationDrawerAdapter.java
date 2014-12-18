@@ -1,5 +1,6 @@
 package com.bugchain.android.development.material_navigation_drawer;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -60,6 +61,19 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                 return true;
             }
         });
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(navigationDrawerCallbacks != null){
+                    navigationDrawerCallbacks.onNavigationDrawerItemSelected(position);
+                }
+            }
+        });
+        if(mSelecedPosition == position || mTouchPosition == position){
+            viewHolder.itemView.setBackgroundColor(viewHolder.itemView.getContext().getResources().getColor(R.color.select_gray));
+        }else {
+            viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        }
     }
 
     private void touchPosition(int position){

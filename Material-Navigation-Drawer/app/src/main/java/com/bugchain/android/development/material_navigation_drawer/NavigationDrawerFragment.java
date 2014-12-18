@@ -51,7 +51,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(navigationItems);
         adapter.setNavigationDrawerCallbacks(this);
         mDrawerList.setAdapter(adapter);
-        sellectedItem(mCurrentSelectPosition);
+        selectItem(mCurrentSelectPosition);
 
         return rootView;
     }
@@ -108,6 +108,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         };
         if(!mUserLearnedDrawer && !mFromSaveInstanceState)
             mDrawerLayout.openDrawer(mFragmentContentView);
+
         mDrawerLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -134,13 +135,13 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public List<NavigationItem> getMenu(){
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem("Item 1",getResources().getDrawable(R.drawable.ic_launcher)));
-        items.add(new NavigationItem("Item 2",getResources().getDrawable(R.drawable.ic_launcher)));
-        items.add(new NavigationItem("Item 3",getResources().getDrawable(R.drawable.ic_launcher)));
+        items.add(new NavigationItem("Item 1",getResources().getDrawable(R.drawable.ic_menu_check)));
+        items.add(new NavigationItem("Item 2",getResources().getDrawable(R.drawable.ic_menu_check)));
+        items.add(new NavigationItem("Item 3",getResources().getDrawable(R.drawable.ic_menu_check)));
         return items;
     }
 
-    void sellectedItem(int position){
+    void selectItem(int position){
         mCurrentSelectPosition = position;
         if(mDrawerLayout != null){
             mDrawerLayout.closeDrawer(mFragmentContentView);
@@ -173,12 +174,13 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        sellectedItem(position);
+        selectItem(position);
     }
 
     public void setDrawerLayout(DrawerLayout drawerLayout){
         mDrawerLayout = drawerLayout;
     }
+
     public static void saveSharedSetting(Context context,String settingName,String settingVales){
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_FILE,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
