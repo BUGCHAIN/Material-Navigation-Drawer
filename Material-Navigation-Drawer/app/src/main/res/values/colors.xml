@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#3F51B5</color>
+    <color name="primaryDarkColor">#3F51B5</color>
+    <color name="accentColor">#3F51B5</color>
+    <color name="drawerBackground">#F2F2F2</color>
+    <color name="windowBackground">#DEDEDE</color>
+    <color name="textPrimaryColor">#FFFFFF</color>
+    <color name="navigationColor">#000000</color>
+
+    <color name="select_gray">#FFDBDBDB</color>
+
+</resources>
