@@ -17,7 +17,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
     private List<NavigationItem> navigationItems;
     private NavigationDrawerCallbacks navigationDrawerCallbacks;
-    private int mSelecedPosition;
+    private int mSelectedPosition;
     private int mTouchPosition = -1;
 
     public NavigationDrawerAdapter(List<NavigationItem> navigationItems){
@@ -69,7 +69,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                 }
             }
         });
-        if(mSelecedPosition == position || mTouchPosition == position){
+        if(mSelectedPosition == position || mTouchPosition == position){
             viewHolder.itemView.setBackgroundColor(viewHolder.itemView.getContext().getResources().getColor(R.color.select_gray));
         }else {
             viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
@@ -86,8 +86,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     }
 
     public void selectionPosition(int position){
-        int lastPosition = mSelecedPosition;
-        mSelecedPosition = position;
+        int lastPosition = mSelectedPosition;
+        mSelectedPosition = position;
         notifyItemChanged(lastPosition);
         notifyItemChanged(position);
     }

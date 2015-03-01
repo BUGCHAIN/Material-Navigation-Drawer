@@ -2,18 +2,19 @@ package com.bugchain.android.development.material_navigation_drawer;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
-
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks{
 
-    private Toolbar mToolbar;
+    private static Toolbar mToolbar;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     public static Activity activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         activity = MainActivity.this;
         mToolbar = (Toolbar)findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.fragment_drawer,(DrawerLayout)findViewById(R.id.drawer),mToolbar);
@@ -30,9 +35,26 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        Toast.makeText(getApplicationContext(),"Menu item selected --> " + position,Toast.LENGTH_SHORT).show();
+        Fragment fragment = null;
 
+        if(position == 0){
+            fragment = new Menu1Fragment();
+        }else if(position == 1){
+            fragment = new Menu2Fragment();
+        }else if(position==2){
+            fragment = new Menu3Fragment();
+        }
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.setCustomAnimations(R.animator.accordion_left_in,R.animator.accordion_left_out,
+//                        R.animator.accordion_right_in,R.animator.accordion_right_out);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        transaction.replace(R.id.container,fragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
     }
+
+
 
     @Override
     public void onBackPressed() {

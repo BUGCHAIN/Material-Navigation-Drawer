@@ -37,6 +37,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private boolean mUserLearnedDrawer;
     private boolean mFromSaveInstanceState;
     private int mCurrentSelectPosition;
+    private Toolbar mToolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -87,7 +88,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     public void setup(int fragmentId,DrawerLayout drawerLayout,Toolbar toolbar){
         mFragmentContentView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
+        mToolbar = toolbar;
         mActionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(),mDrawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
+
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -135,9 +138,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public List<NavigationItem> getMenu(){
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem("Item 1",getResources().getDrawable(R.drawable.ic_menu_check)));
-        items.add(new NavigationItem("Item 2",getResources().getDrawable(R.drawable.ic_menu_check)));
-        items.add(new NavigationItem("Item 3",getResources().getDrawable(R.drawable.ic_menu_check)));
+        items.add(new NavigationItem("Menu 1",getResources().getDrawable(R.drawable.ic_menu_check)));
+        items.add(new NavigationItem("Menu 2",getResources().getDrawable(R.drawable.ic_menu_check)));
+        items.add(new NavigationItem("Menu 3",getResources().getDrawable(R.drawable.ic_menu_check)));
         return items;
     }
 
@@ -145,6 +148,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mCurrentSelectPosition = position;
         if(mDrawerLayout != null){
             mDrawerLayout.closeDrawer(mFragmentContentView);
+            mToolbar.setTitle("Menu " + (position+1));
         }
         if(mCallbacks != null){
             mCallbacks.onNavigationDrawerItemSelected(position);
